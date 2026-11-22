@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Великая Отечественная война 1941–1945 — хроника и битвы</title>
+<meta name="description" content="Краткий справочник: хронология Великой Отечественной войны, ключевые битвы, цифры и города-герои.">
+<style>
+:root{
+  --bg:#12100e;
+  --bg2:#191612;
+  --panel:#1e1a16;
+  --line:#3a322a;
+  --text:#e8dfd2;
+  --muted:#a89a88;
+  --accent:#b4392a;
+  --accent2:#d9b26a;
+  --paper:#d8c3a5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(180,57,42,.18), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(217,178,106,.08), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font:16px/1.65 "Segoe UI", Roboto, Arial, sans-serif;
+}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.15;margin:0}
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* top bar */
+.top{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(10px);
+  background:rgba(18,16,14,.82);
+  border-bottom:1px solid var(--line);
+}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.brand{font-family:Georgia,serif;font-weight:700;letter-spacing:.08em;color:var(--paper);white-space:nowrap}
+.brand b{color:var(--accent2)}
+.nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.08em}
+.nav a:hover{color:var(--text);text-decoration:none}
+
+/* hero */
+.hero{position:relative;padding:88px 0 72px;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 3px);
+  opacity:.5;
+}
+.hero .wrap{position:relative;z-index:2}
+.kicker{color:var(--accent2);letter-spacing:.18em;text-transform:uppercase;font-size:13px}
+.hero h1{font-size:clamp(38px,6vw,72px);margin:14px 0 18px;color:var(--paper)}
+.hero h1 span{color:var(--accent)}
+.hero p{max-width:720px;color:var(--muted);font-size:18px}
+.hero .years{font-family:Georgia,serif;font-size:clamp(60px,12vw,150px);line-height:.9;color:rgba(217,178,106,.10);position:absolute;right:-10px;bottom:-10px;pointer-events:none;white-space:nowrap}
+
+/* sections */
+section{padding:64px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(26px,3.4vw,40px);color:var(--paper)}
+.sec-head .num{font-family:Georgia,serif;color:var(--accent);font-size:20px}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0 0 0 26px;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 30px 24px}
+.timeline li::before{
+  content:"";position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent2);
+}
+.timeline time{display:block;color:var(--accent2);font-weight:600;letter-spacing:.04em}
+.timeline h3{font-size:20px;margin:4px 0 4px;color:var(--paper)}
+.timeline p{margin:0;color:var(--muted)}
+
+/* battles */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+  border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden;
+}
+.card::after{content:"";position:absolute;left:0;top:0;height:3px;width:54px;background:var(--accent)}
+.card .date{color:var(--accent2);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.card h3{font-size:21px;margin:8px 0 8px;color:var(--paper)}
+.card p{margin:0;color:var(--muted);font-size:15px}
+
+/* numbers */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.stat b{display:block;font-family:Georgia,serif;font-size:clamp(30px,4vw,46px);color:var(--accent2);line-height:1}
+.stat span{display:block;color:var(--muted);margin-top:8px;font-size:14px}
+
+/* cities */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:10px 16px;border-radius:999px;color:var(--text);font-size:15px}
+.chip b{color:var(--accent2);font-weight:600}
+
+/* quote */
+.quote{max-width:820px;margin:0 auto;text-align:center}
+.quote blockquote{margin:0;font-family:Georgia,serif;font-size:clamp(22px,3vw,32px);color:var(--paper)}
+.quote cite{display:block;margin-top:14px;color:var(--muted);font-style:normal}
+
+/* sources */
+.sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.source{display:block;border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:rgba(255,255,255,.02)}
+.source b{display:block;color:var(--paper);margin-bottom:4px}
+.source span{color:var(--muted);font-size:14px}
+
+footer{padding:34px 0 54px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* family */
+.family{display:grid;grid-template-columns:1fr 1.15fr;gap:22px;align-items:stretch}
+.family-card{
+  border:1px solid var(--line);border-radius:16px;padding:26px;
+  background:
+    linear-gradient(180deg, rgba(180,57,42,.12), rgba(255,255,255,0) 40%),
+    var(--panel);
+  position:relative;overflow:hidden;
+}
+.family-card::before{content:"";position:absolute;left:26px;top:0;width:64px;height:3px;background:var(--accent)}
+.family-name{font-family:Georgia,serif;font-size:26px;color:var(--paper);line-height:1.2;margin-top:6px}
+.family-sub{color:var(--accent2);font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:8px 0 18px}
+.family-facts{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.family-facts li{display:grid;grid-template-columns:110px 1fr;gap:10px;font-size:15px;color:var(--muted);border-top:1px dashed rgba(58,50,42,.8);padding-top:10px}
+.family-facts li span{color:var(--text);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.family-story p{margin:0 0 14px;color:var(--muted);font-size:16px}
+.family-story p:first-child{color:var(--text);font-size:17px}
+.family-note{font-style:italic;font-size:14px !important;border-left:2px solid var(--line);padding-left:14px}
+
+@media (max-width:820px){
+  .family{grid-template-columns:1fr}
+}
+
+
+  .hero{padding:64px 0 54px}
+  .nav{display:none}
+  .timeline{padding-left:18px}
+  .timeline li{padding-left:18px}
+  .timeline li::before{left:-25px}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <div class="brand">1941 <b>—</b> 1945</div>
+    <nav class="nav">
+      <a href="#timeline">Хроника</a>
+      <a href="#battles">Битвы</a>
+      <a href="#numbers">Цифры</a>
+      <a href="#cities">Города</a>
+      <a href="#family">Семья</a>
+      <a href="#sources">Источники</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Справочник · Великая Отечественная</div>
+    <h1>Война, которая<br>изменила <span>всё</span></h1>
+    <p>22 июня 1941 года началась Великая Отечественная война — самая кровопролитная в истории нашей страны. Четыре года, 1418 дней и ночей, миллионы судеб. Здесь — хроника, ключевые битвы и цифры, которые нельзя забывать.</p>
+    <div class="years">1941—1945</div>
+  </div>
+</header>
+
+<main>
+
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>Хроника</h2></div>
+    <ol class="timeline">
+      <li class="reveal">
+        <time>22 июня 1941</time>
+        <h3>Начало войны</h3>
+        <p>Нацистская Германия и её союзники вторглись в СССР. Началась оборона Брестской крепости, ставшая символом стойкости.</p>
+      </li>
+      <li class="reveal">
+        <time>8 сентября 1941</time>
+        <h3>Блокада Ленинграда</h3>
+        <p>Город оказался в кольце на 872 дня. Единственной связью с Большой землёй стала «Дорога жизни» через Ладожское озеро.</p>
+      </li>
+      <li class="reveal">
+        <time>30 сентября 1941</time>
+        <h3>Битва за Москву</h3>
+        <p>К 5 декабря Красная армия остановила наступление и перешла в контрнаступление — рухнул план «молниеносной войны».</p>
+      </li>
+      <li class="reveal">
+        <time>17 июля 1942</time>
+        <h3>Сталинградская битва</h3>
+        <p>200 дней боёв. 2 февраля 1943 года окружённая 6-я армия Паулюса капитулировала. Начался коренной перелом в войне.</p>
+      </li>
+      <li class="reveal">
+        <time>5 июля 1943</time>
+        <h3>Курская битва</h3>
+        <p>Крупнейшее танковое сражение под Прохоровкой. После Курска стратегическая инициатива окончательно перешла к СССР.</p>
+      </li>
+      <li class="reveal">
+        <time>27 января 1944</time>
+        <h3>Снятие блокады Ленинграда</h3>
+        <p>Город полностью освобождён. Впереди — освобождение Украины, Белоруссии и Европы.</p>
+      </li>
+      <li class="reveal">
+        <time>23 июня 1944</time>
+        <h3>Операция «Багратион»</h3>
+        <p>Освобождение Белоруссии. Разгром группы армий «Центр» — одна из крупнейших операций войны.</p>
+      </li>
+      <li class="reveal">
+        <time>16 апреля 1945</time>
+        <h3>Берлинская операция</h3>
+        <p>Штурм столицы рейха. 30 апреля над Рейхстагом поднято Знамя Победы.</p>
+      </li>
+      <li class="reveal">
+        <time>9 мая 1945</time>
+        <h3>Победа</h3>
+        <p>Акт о безоговорочной капитуляции Германии вступил в силу. 24 июня на Красной площади прошёл Парад Победы.</p>
+      </li>
+      <li class="reveal">
+        <time>2 сентября 1945</time>
+        <h3>Конец Второй мировой</h3>
+        <p>Капитуляция Японии. Вторая мировая война завершена.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="battles">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>Ключевые битвы</h2></div>
+    <div class="grid">
+      <article class="card reveal">
+        <div class="date">30.09.1941 — 20.04.1942</div>
+        <h3>Битва за Москву</h3>
+        <p>Срыв «Барбароссы»: вермахт впервые потерпел крупное поражение и был отброшен от столицы.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">08.09.1941 — 27.01.1944</div>
+        <h3>Ленинград</h3>
+        <p>872 дня блокады, голод и холод. Город выстоял, а «Дорога жизни» спасла десятки тысяч человек.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">17.07.1942 — 02.02.1943</div>
+        <h3>Сталинград</h3>
+        <p>Уличные бои за каждый дом. Окружение и капитуляция 6-й армии вермахта — перелом войны.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">05.07 — 23.08.1943</div>
+        <h3>Курская дуга</h3>
+        <p>Крупнейшее танковое сражение под Прохоровкой. Германия окончательно утратила инициативу.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">август — декабрь 1943</div>
+        <h3>Битва за Днепр</h3>
+        <p>Форсирование реки и освобождение Киева. Одна из самых масштабных операций по числу участников.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">30.10.1941 — 04.07.1942</div>
+        <h3>Оборона Севастополя</h3>
+        <p>250 дней обороны главной базы Черноморского флота. Освобождён 9 мая 1944 года.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">16.04 — 02.05.1945</div>
+        <h3>Берлинская операция</h3>
+        <p>Завершающая битва: штурм Берлина и Знамя Победы над Рейхстагом.</p>
+      </article>
+      <article class="card reveal">
+        <div class="date">1944 — 1945</div>
+        <h3>Освобождение Европы</h3>
+        <p>Румыния, Болгария, Югославия, Венгрия, Австрия, Чехословакия и Польша — путь Красной армии к Победе.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="numbers">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2>Цифры</h2></div>
+    <div class="stats">
+      <div class="stat reveal"><b>1418</b><span>дней и ночей длилась война</span></div>
+      <div class="stat reveal"><b>~27 млн</b><span>погибших граждан СССР — цена Победы</span></div>
+      <div class="stat reveal"><b>872</b><span>дня блокады Ленинграда</span></div>
+      <div class="stat reveal"><b>12</b><span>городов-героев и Брестская крепость-герой</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="cities">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2>Города-герои</h2></div>
+    <div class="chips">
+      <span class="chip"><b>Ленинград</b> · 1941–1944</span>
+      <span class="chip"><b>Москва</b> · 1941–1942</span>
+      <span class="chip"><b>Сталинград</b> · 1942–1943</span>
+      <span class="chip"><b>Киев</b> · 1941</span>
+      <span class="chip"><b>Одесса</b> · 1941</span>
+      <span class="chip"><b>Севастополь</b> · 1941–1942</span>
+      <span class="chip"><b>Смоленск</b> · 1941</span>
+      <span class="chip"><b>Тула</b> · 1941</span>
+      <span class="chip"><b>Керчь</b> · 1941–1942</span>
+      <span class="chip"><b>Новороссийск</b> · 1942–1943</span>
+      <span class="chip"><b>Минск</b> · 1941</span>
+      <span class="chip"><b>Мурманск</b> · 1941–1944</span>
+      <span class="chip"><b>Брестская крепость</b> · 1941</span>
+    </div>
+  </div>
+</section>
+
+<section id="memory">
+  <div class="wrap">
+    <div class="quote">
+      <blockquote>«Никто не забыт, ничто не забыто»</blockquote>
+      <cite>Ольга Берггольц</cite>
+    </div>
+  </div>
+</section>
+
+<section id="family">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">05</span><h2>Моя семья в войне</h2></div>
+    <div class="family">
+      <div class="family-card">
+        <div class="family-name">Осипов Алексей Дмитриевич</div>
+        <div class="family-sub">танкист · участник битвы под Москвой</div>
+        <ul class="family-facts">
+          <li><span>Война</span> Битва за Москву, 1941–1942</li>
+          <li><span>Ранение</span> Лечение в эвакогоспитале в ст. Новопокровской (вероятно, ЭГ № 4538)</li>
+          <li><span>Семья</span> Жена — Осипова (Иванова) Таисия Ивановна, работала в том же госпитале</li>
+          <li><span>После войны</span> Водитель райисполкома, 1945–1946</li>
+          <li><span>Дом</span> ст. Новопокровская, ул. Гражданская, 7</li>
+          <li><span>Сын</span> Николай, родился в ноябре 1946</li>
+          <li><span>Память</span> Умер в 1947 году, похоронен в ст. Новопокровской</li>
+        </ul>
+      </div>
+      <div class="family-story">
+        <p>Он ушёл на фронт, когда ему было больше тридцати. Танкист, участник битвы за Москву — той, где впервые рухнул план «молниеносной войны».</p>
+        <p>После тяжёлого ранения его выходили в эвакогоспитале в родной станице Новопокровской. Там же работала Таисия Ивановна — будущая жена. Война свела их, а мирная жизнь подарила сына Николая.</p>
+        <p>Он не дожил до Победы в полной мере: умер в 1947 году от воспаления лёгких — последствия ранения. Мы ищем его архивные документы: год рождения, часть, награды.</p>
+        <p class="family-note">Раздел собирается по семейным воспоминаниям и архивным запросам. Если у вас есть фотографии, письма или документы — они станут частью этой истории.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">06</span><h2>Где искать документы</h2></div>
+    <div class="sources">
+      <a class="source" href="https://pamyat-naroda.ru" target="_blank" rel="noopener">
+        <b>Память народа</b><span>Наградные документы, боевой путь, места захоронений</span>
+      </a>
+      <a class="source" href="https://obd-memorial.ru" target="_blank" rel="noopener">
+        <b>ОБД «Мемориал»</b><span>Потери, госпитальные книги, списки захоронений</span>
+      </a>
+      <a class="source" href="https://podvignaroda.ru" target="_blank" rel="noopener">
+        <b>Подвиг народа</b><span>Приказы о наградах и наградные листы</span>
+      </a>
+      <a class="source" href="https://moypolk.ru" target="_blank" rel="noopener">
+        <b>Бессмертный полк</b><span>Семейные истории, фотографии и воспоминания</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Справочник о Великой Отечественной войне 1941–1945</span>
+    <span>Сохранение памяти — наша общая задача</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
+
+
